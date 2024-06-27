@@ -45,7 +45,7 @@ global.buttonHandler = (message, interaction, orgContent) => {
   const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('ManageMessages');
   const buttonCollector = message.createMessageComponentCollector({
     filter,
-    time: config.commands.buttonTimeout
+    time: config.commands.buttonTimeout,
   });
   buttonCollector.on('collect', async (used) => {
     buttonCollector.stop();

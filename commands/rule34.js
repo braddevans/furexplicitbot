@@ -125,7 +125,7 @@ module.exports.run = async (interaction) => {
     const message = await reply(interaction, {
       embeds: [embed],
       components: [buttons],
-      fetchReply: true
+      fetchReply: true,
     }, true);
     buttonHandler(interaction, message, embed, submission);
   });
