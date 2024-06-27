@@ -122,7 +122,11 @@ module.exports.run = async (interaction) => {
   if (results.length === 0) return messageFail(interaction, uwu('Sorry, I found no pictures with your tags.'));
   results.forEach(async (submission) => {
     const embed = prepareMessage(submission);
-    const message = await reply(interaction, { embeds: [embed], components: [buttons], fetchReply: true }, true);
+    const message = await reply(interaction, {
+      embeds: [embed],
+      components: [buttons],
+      fetchReply: true
+    }, true);
     buttonHandler(interaction, message, embed, submission);
   });
 };

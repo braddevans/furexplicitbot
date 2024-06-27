@@ -40,6 +40,27 @@ global.prettyCheck = (question) => {
   return '❌';
 };
 
+global.buttonHandler = (message, interaction, orgContent) => {
+  // start button collector
+  const filter = (i) => interaction.user.id === i.user.id || !interaction.memberPermissions.has('ManageMessages');
+  const buttonCollector = message.createMessageComponentCollector({
+    filter,
+    time: config.commands.buttonTimeout
+  });
+  buttonCollector.on('collect', async (used) => {
+    buttonCollector.stop();
+    if (used.customId === 'delete') return message.delete();
+  });
+  buttonCollector.on('end', async (collected) => {
+    if (collected.size === 0) {
+      message.edit({
+        embeds: [orgContent],
+        components: [],
+      });
+    }
+  });
+};
+
 module.exports.data = {
   name: 'globalFunc',
 };
