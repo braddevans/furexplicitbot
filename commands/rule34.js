@@ -34,8 +34,8 @@ const buttons = new ActionRowBuilder()
 async function getTags(interaction) {
   const tagsRaw = interaction.options.getString('tags', false) || '';
   const tags = tagsRaw.replaceAll(', ', ' ');
-  const safeTags = await interaction.client.functions.get('ENGINE_tagsCleanup').run(interaction, tags);
-  return safeTags;
+  return interaction.client.functions.get('ENGINE_tagsCleanup')
+    .run(interaction, tags);
 }
 
 function getRandomItems(limit, posts) {
@@ -43,6 +43,7 @@ function getRandomItems(limit, posts) {
   return shuffled.slice(0, limit);
 }
 
+// unused parameter: nsfw
 async function requestPictures(tags, limit, nsfw) {
   const sort = sortList[rand(sortList.length)];
   const order = orderList[rand(orderList.length)];
@@ -63,8 +64,7 @@ async function requestPictures(tags, limit, nsfw) {
   const posts = postsRaw.data;
   if (posts.length === 0) return [];
   const hardLimit = posts.length < limit ? posts.length : limit;
-  const chosenPosts = getRandomItems(hardLimit, posts);
-  return chosenPosts;
+  return getRandomItems(hardLimit, posts);
 }
 
 function prepareMessage(submission) {

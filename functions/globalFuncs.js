@@ -15,17 +15,11 @@ global.uwu = (text) => {
   return out.join(' ');
 };
 
-global.messageFail = async (interaction, body, color, ephemeral) => {
-  const sentMessage = await client.functions.get('richEmbedMessage')
-    .run(interaction, body, '', color || Colors.Red, false, ephemeral || true);
-  return sentMessage;
-};
+global.messageFail = async (interaction, body, color, ephemeral) => client.functions.get('richEmbedMessage')
+  .run(interaction, body, '', color || Colors.Red, false, ephemeral || true);
 
-global.messageSuccess = async (interaction, body, color, ephemeral) => {
-  const sentMessage = await client.functions.get('richEmbedMessage')
-    .run(interaction, body, '', color || Colors.Green, false, ephemeral || false);
-  return sentMessage;
-};
+global.messageSuccess = async (interaction, body, color, ephemeral) => client.functions.get('richEmbedMessage')
+  .run(interaction, body, '', color || Colors.Green, false, ephemeral || false);
 
 // raw reply to commands
 global.reply = (interaction, payload, followUp = false) => {
